@@ -1,0 +1,17 @@
+<div class="column">
+    <div class="column-header">
+        <nav>
+            <h2>{{ column.columnTitle }}</h2>
+        </nav>
+        <div class="button-group">
+            <!-- ovo ide sve u meni component -->
+            <button mat-button class="create-card" (click)="addCard()">Add card</button>
+            <button mat-button class="delete-column" *ngIf="column" (click)="deleteColumn(column)">Delete
+                column</button>
+        </div>
+    </div>
+    <ng-container class="cards" *ngFor="let card of cards">
+        <app-card [column]="column" [card]="card" (cardDeleted)="onCardDeleted($event)"
+            (cardEdited)="onCardEdited()"></app-card>
+    </ng-container>
+</div>

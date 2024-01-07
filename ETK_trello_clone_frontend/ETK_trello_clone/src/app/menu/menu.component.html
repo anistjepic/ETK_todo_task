@@ -1,0 +1,99 @@
+<div class="menu">
+  <ul>
+    <li>
+      <button mat-button class="create-column" (click)="showCreateColumnForm = !showCreateColumnForm">Create new
+        column</button>
+    </li>
+    <div class="create-column-form" *ngIf="showCreateColumnForm">
+      <h1 mat-dialog-title class="dialog-title">Create new column</h1>
+      <div mat-dialog-content class="form-container">
+        <form #createColumnForm='ngForm' (submit)="createColumn()">
+          <div class="form-group">
+            <label for="columnName">Column name:</label><br>
+            <input type="text" id="inputField" name="columnName" placeholder="Enter column name"
+              [(ngModel)]="columnName" required><br>
+          </div>
+          <div class="alert"
+            *ngIf="createColumnForm.controls['columnName']?.touched && createColumnForm.controls['columnName']?.invalid">
+            Column name is required...</div>
+          <div class="form-group">
+            <label for="columnState">Select status:</label>
+            <select id="selectField" name="columnState" [(ngModel)]="columnStatus" required>
+              <option value="" disabled selected>Select an option</option>
+              <option value="TO_DO">To-Do</option>
+              <option value="IN_PROGRESS">In progress</option>
+              <option value="DONE">Done</option>
+            </select>
+          </div><br>
+          <div class="form-buttons">
+            <button mat-button class="submit_btn" type="submit" [disabled]="createColumnForm.invalid">Submit</button>
+            <button mat-button class="cancel_btn" (click)="cancelForm()">Cancel</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <li>
+      <button mat-button class="create-card" (click)="showCreateForm = !showCreateForm">Add new card</button>
+      <div class="create-card-form" *ngIf="showCreateForm">
+        <h1 mat-dialog-title class="dialog-title">Create new card</h1>
+        <div mat-dialog-content class="form-container">
+          <form #createForm='ngForm'>
+            <div class="form-group">
+              <label for="cardName">Card name:</label><br>
+              <input type="text" id="inputField" name="cardName" placeholder="Enter card name" [(ngModel)]="cardName"
+                required><br>
+            </div>
+            <div class="alert"
+              *ngIf="createForm.controls['cardName'].touched && createForm.controls['cardName'].invalid">
+              Card name is required...</div>
+            <div class="form-group">
+              <label for="description">Description:</label><br>
+              <textarea name="description" id="card-description" cols="30" rows="10" class="card-description"
+                [(ngModel)]="description" required></textarea>
+            </div>
+            <div class="alert"
+              *ngIf="createForm.controls['description'].touched && createForm.controls['description'].invalid">Card
+              description is required...</div>
+            <div class="form-group">
+              <label for="cardOwner">Card owner:</label><br>
+              <input type="text" id="inputField" name="cardOwner" placeholder="Enter task handler"
+                [(ngModel)]="cardOwner" required><br>
+            </div>
+            <div class="alert"
+              *ngIf="createForm.controls['cardOwner'].touched && createForm.controls['cardOwner'].invalid">
+              Card owner is required...</div>
+            <br>
+            <div class="form-buttons">
+              <button mat-button class="submit_btn" type="submit" [disabled]="createForm.invalid">Submit</button>
+              <button mat-button class="cancel_btn" (click)="cancelForm()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </li>
+    <li>
+      <button mat-button class="filter-column" (click)="showFilterColumnForm = !showFilterColumnForm">Filter
+        columns</button>
+      <div class="filter-column-form" *ngIf="showFilterColumnForm">
+        <h1 mat-dialog-title class="dialog-title">Filter columns by status</h1>
+        <div mat-dialog-content class="form-container">
+          <form #filterColumnForm='ngForm' (submit)="filterColumn(columnStatus)">
+            <div class="form-group">
+              <label for="columnStatus">Select status:</label>
+              <select id="selectField" name="columnStatus" [(ngModel)]="columnStatus" required>
+                <option value="" disabled selected>Select an option</option>
+                <option value="TO_DO">To-Do</option>
+                <option value="IN_PROGRESS">In progress</option>
+                <option value="DONE">Done</option>
+              </select>
+            </div><br>
+            <div class="form-buttons">
+              <button mat-button class="submit_btn" type="submit" [disabled]="filterColumnForm.invalid">Submit</button>
+              <button mat-button class="cancel_btn" (click)="cancelForm()">Cancel</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </li>
+  </ul>
+</div>

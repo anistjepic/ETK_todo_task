@@ -1,0 +1,17 @@
+<mat-card class="card">
+    <mat-card-header>
+      <mat-card-subtitle>Card name:</mat-card-subtitle>
+      <mat-card-title>{{ card?.cardName }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <mat-card-subtitle>Description:</mat-card-subtitle>
+      <p>{{ card?.cardDescription }}</p>
+      <mat-card-subtitle>Card owner:</mat-card-subtitle>
+      <p>{{ card?.cardOwner}}</p>
+      <mat-divider></mat-divider>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button class="edit-card" (click)="card && toggleEditForm(card)">Edit</button>
+      <button mat-button class="delete-card" (click)="card && deleteCard(card)">Delete</button>
+    </mat-card-actions>
+  </mat-card> 

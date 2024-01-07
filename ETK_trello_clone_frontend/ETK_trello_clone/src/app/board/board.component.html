@@ -1,0 +1,12 @@
+<div class="container">
+  <div class="menu">
+    <app-menu [board]="board" (onCreateColumn)="onCreateColumn($event)"></app-menu>
+  </div>
+  <div class="board">
+    <div class="columns-container">
+      <div *ngFor="let column of columns" class="columns">
+        <app-column [board]="board" [column]="column" (onDeleteColumn)="onDeleteColumn($event)"></app-column>
+      </div>
+    </div>
+  </div>
+</div>
