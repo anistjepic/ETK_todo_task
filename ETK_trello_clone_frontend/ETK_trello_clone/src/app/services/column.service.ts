@@ -24,9 +24,12 @@ export class ColumnService {
     return this.http.delete<void>(`${this.apiServerUrl}/${columnId}`);
   }
 
-  getBoard(id: number): Observable<Board | undefined> {
-    const boardUrl = `http://localhost:8080/getBoard?id=${id}`;
-    return this.http.get<Board>(boardUrl);
+  getBoard(boardId: number): Observable<Board | undefined> {
+    const boardUrl = `http://localhost:8080/boards/getBoard/${boardId}`;
+    //original
+    // return this.http.get<Board>(boardUrl);
+
+    return this.http.get<{ board: Board, boardName: string }>(boardUrl);
   }
 
   getBoards(): Observable<Board[]> {

@@ -5,11 +5,11 @@ import { BoardListComponent } from './board-list/board-list.component';
 
 const routes: Routes = [
   {
-    path: 'board/:id',
+    path: 'board/:boardId',
     component: BoardComponent,
   },
   {
-    path: 'boards/',
+    path: 'boards',
     component: BoardListComponent,
   },
   {

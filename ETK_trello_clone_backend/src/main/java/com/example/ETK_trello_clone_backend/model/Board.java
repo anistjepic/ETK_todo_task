@@ -23,8 +23,8 @@ public class Board {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long boardId;
     private String boardName;
-    private String boardOwner;
 
+    @JsonIgnore
     @ToString.Exclude
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Column> columns = new ArrayList<>();

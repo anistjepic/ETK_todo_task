@@ -10,16 +10,15 @@ import { FormGroup, FormsModule } from '@angular/forms';
 import { ColumnService } from '../services/column.service';
 
 @Component({
-  selector: 'app-create-card',
+  selector: 'app-edit-card',
   standalone: true,
   imports: [MatButtonModule, CardComponent, NgFor, NgIf, FormsModule],
-  templateUrl: './create-card.component.html',
-  styleUrl: './create-card.component.css'
+  templateUrl: './edit-card.component.html',
+  styleUrl: './edit-card.component.css'
 })
-
-export class CreateCardComponent {
+export class EditCardComponent {
   @Input() column?: Column;
-  @Output() onDeleteColumn = new EventEmitter<Column>();
+
   cards: Card[] = [];
   showCreateForm = false;
   cardName!: string;
@@ -30,12 +29,12 @@ export class CreateCardComponent {
 
   constructor(public dialog: MatDialog,
     private columnService: ColumnService,
-    public dialogRef: MatDialogRef<CreateCardComponent>,
+    public dialogRef: MatDialogRef<EditCardComponent>,
     @Inject(MAT_DIALOG_DATA) public board: any
   ) { }
 
   ngOnInit(): void {
-    console.log("create-card", this.column)
+    console.log("edit-card", this.column);
     this.getColumns();
   }
 
@@ -60,10 +59,6 @@ export class CreateCardComponent {
     this.dialogRef.close();
   }
 
-  createCard(formData: any): void {
-    this.resetForm();
-  }
-
   resetForm() {
     this.cardName = '';
     this.cardDescription = '';
@@ -72,19 +67,7 @@ export class CreateCardComponent {
     this.showCreateForm = false;
   }
 
-  onCardDeleted(deletedCard: Card): void {
-    this.cards = this.cards.filter(card => card.cardId !== deletedCard.cardId);
-  }
-
   onCardEdited(): void {
-  }
-
-  deleteColumn(column: Column): void {
-    if (column.columnId) {
-      this.onDeleteColumn.emit(column);
-    } else {
-      console.error('Column is undefined.');
-    }
   }
 
   submit(form: FormGroup) {

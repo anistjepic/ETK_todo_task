@@ -19,12 +19,21 @@ public class BoardController {
     private final BoardServices boardService;
 
 
-    @GetMapping("/boards")
+    @GetMapping()
     public ResponseEntity<Iterable<Board>> getAllBoards() {
         Iterable<Board> boards = boardService.getAllBoards();
         return new ResponseEntity<>(boards, HttpStatus.OK);
     }
 
+    @GetMapping("/getBoard/{boardId}")
+    public ResponseEntity<Board> getBoardById(@PathVariable("boardId") Long id) {
+        Board board = boardService.getBoardByBoardId(id);
+        if (board != null) {
+            return new ResponseEntity<>(board, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
     @GetMapping("/{name}")
     public ResponseEntity<Board> getBoardByName(@PathVariable("name") String name) {
         Board board = boardService.getBoardByBoardName(name);

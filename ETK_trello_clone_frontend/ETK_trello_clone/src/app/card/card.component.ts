@@ -10,6 +10,7 @@ import { NgIf } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { CreateCardComponent } from '../create-card/create-card.component';
 import { Column } from '../models/column';
+import { Board } from '../models/board';
 
 
 @Component({
@@ -24,6 +25,7 @@ export class CardComponent {
 
   @Input() card: Card | undefined;
   @Input() column: Column | undefined;
+  // @Input() board: Board | undefined;
 
   @Output() cardDeleted: EventEmitter<Card> = new EventEmitter<Card>();
   @Output() cardEdited: EventEmitter<Card> = new EventEmitter<Card>();
@@ -33,6 +35,7 @@ export class CardComponent {
   description!: string;
   owner!: string;
   status!: string;
+  selectedCard?: Card;
 
   constructor(private cardService: CardService,
     public dialog: MatDialog) { }
@@ -44,30 +47,52 @@ export class CardComponent {
     this.status = card.status;
   }
 
-  toggleEditForm(card: Card): void {
+  toggleEditForm(column: Column, card: Card): void {
+    console.log("toggleEditForm: ");
+    console.log("card: ", card);
+    console.log("column: ", column);
+
+    this.selectedCard = { ...card };
+    this.selectedCard.column = {...column}; // Make a copy of the card
+    console.log("Selected card: ", this.selectedCard)
+    // this.showEditForm = !this.showEditForm;
+    console.log('Card data:', this.card);
     const dialogRef = this.dialog.open(CreateCardComponent, {
-      width: '300px', // Set width as per your requirements
       data: this.column?.board
     });
   
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
+        console.log("Test ---- result");
+        console.log(result);
         this.cardService.createCard({
           ...result,
           status: this.column!.columnStatus,
           column: this.column!
         }).subscribe(
           (response: Card) => {
-            console.log('Card created successfully:', response);
-            // this.getCards();
+            console.log('Card updated successfully:', response);
           },
           (error) => {
-            console.error('Error creating card:', error);
+            console.error('Error updating card:', error);
           }
         );
       }
     });
   }
+
+  // toggleEditForm(card: Card): void {
+  //   const dialogRef = this.dialog.open(CreateCardComponent, {
+  //     data: { card, board: this.column?.board }
+  //   });
+  
+  //   dialogRef.afterClosed().subscribe((editedCard: Card) => {
+  //     if (editedCard) {
+  //       this.selectedCard = { ...editedCard }; // Update selected card with edited data
+  //       console.log("Selected card: ", this.selectedCard);
+  //     }
+  //   });
+  // }
 
   cancelForm(): void {
     this.showEditForm = false;

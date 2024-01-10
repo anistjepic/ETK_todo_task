@@ -8,6 +8,7 @@ import { FormsModule } from '@angular/forms';
 import { NgIf, NgFor } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Board } from '../models/board';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -32,7 +33,8 @@ export class MenuComponent {
   cardOwner!: string;
   cardStatus?: string;
 
-  constructor(private columnService: ColumnService) {}
+  constructor(private columnService: ColumnService,
+    private router: Router) {}
 
   cancelForm(): void {
     this.columnName = '';
@@ -65,4 +67,9 @@ export class MenuComponent {
     );
     this.showFilterColumnForm = false;
   }
+
+  onClickGoBackToMainPage() {
+    console.log('Clicked application name:');
+    this.router.navigate(['/boards']);
+    }
 }

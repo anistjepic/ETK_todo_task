@@ -1,3 +1,17 @@
-<div class="board">
-  <app-board-item *ngFor="let item of boards"></app-board-item>
+<header>
+  <h1>Created boards</h1>
+</header>
+<div class="boards-container">
+  <div *ngFor="let board of boards" class="board-box">
+    <div class="board-name" (click)="onBoardClick(board)">
+      <span> {{ board.boardName }} </span>
+    </div>
+    <div class="button-container">
+      <button class="edit-button" (click)="onEditClick(board)">Edit</button>
+      <button class="delete-button" (click)="onDeleteClick(board)">Delete</button>
+    </div>
+  </div>
+  <div class="add-board" (click)="onAddBoardClick()">
+    <div class="plus-icon">+</div>
+  </div>
 </div>

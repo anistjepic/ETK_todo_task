@@ -5,7 +5,7 @@ import { Column } from '../models/column';
 import { MatDialog } from '@angular/material/dialog';
 import { CardService } from '../services/card.service';
 import { Card } from '../models/card';
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ColumnService } from '../services/column.service';
@@ -15,7 +15,7 @@ import { Board } from '../models/board';
 @Component({
   selector: 'app-column',
   standalone: true,
-  imports: [MatButtonModule, CardComponent, NgFor, NgIf, FormsModule],
+  imports: [MatButtonModule, CardComponent, NgFor, NgIf, FormsModule, CommonModule],
   templateUrl: './column.component.html',
   styleUrl: './column.component.css'
 })
@@ -56,17 +56,18 @@ export class ColumnComponent {
     this.cardName = '';
     this.description = '';
     this.cardOwner = '';
-    this.status = undefined;
+    this.status = '';
     this.showCreateForm = false;
 }
 
 addCard() {
+  console.log("addCard");
   const dialogRef = this.dialog.open(CreateCardComponent, {
-    width: '300px', // Set width as per your requirements
     data: this.board
   });
 
   dialogRef.afterClosed().subscribe(result => {
+    console.log(result);
     if (result) {
       this.cardService.createCard({
         ...result,
@@ -84,40 +85,32 @@ addCard() {
     }
   });
 }
-
-
-  createCard(): void {
-    const newCard: Card = {
-      cardName: this.cardName,
-      cardDescription: this.description,
-      cardOwner: this.cardOwner,
-      status: this.column!.columnStatus,
-      column: this.column!
-    };
-
-    this.cardService.createCard(newCard).subscribe(
-      (response: Card) => {
-        this.cards.push(response);
-        console.log('Card created successfully:', response);
-      },
-      (error) => {
-        console.error('Error creating card:', error);
-      }
-    );
-
-    this.cardName = '';
-    this.description = '';
-    this.cardOwner = '';
-    this.status = undefined;
-    this.showCreateForm = false;
-  }
-
   onCardDeleted(deletedCard: Card): void {
     this.cards = this.cards.filter(card => card.cardId !== deletedCard.cardId);
   }
 
-  onCardEdited(): void {
-    this.getCards();
+  onCardEdited(editedCard: Card): void {
+    this.updateCard(editedCard);
+  }
+
+  updateCard(editedCard: Card) {
+
+  }
+
+  openEditDialog(card: Card): void {
+
+    console.log("openEditDialog: ");
+    console.log("card: ", card);
+    console.log("column: ", card.column);
+    const dialogRef = this.dialog.open(CreateCardComponent, {
+      data: { card, board: this.column!.board}
+    });
+  
+    dialogRef.afterClosed().subscribe((editedCard: Card) => {
+      if (editedCard) {
+        this.onCardEdited(editedCard); // Pass the edited card data to update
+      }
+    });
   }
 
   deleteColumn(column: Column): void {
@@ -125,6 +118,19 @@ addCard() {
       this.onDeleteColumn.emit(column);
     } else {
       console.error('Column is undefined.');
+    }
+  }
+
+  getColumnHeaderClass(): string{
+    switch (this.column?.columnStatus) {
+      case 'TO_DO':
+        return 'status-to-do';
+      case 'IN_PROGRESS':
+        return 'status-in-progress';
+      case 'DONE':
+        return 'status-done';
+      default:
+        return '';
     }
   }
 }

@@ -1,77 +1,58 @@
 .column {
-    height: 100%;
-    max-width: 400px;
-    border-right: 1px solid white;
-    border-left: 1px solid white;
+    max-width: 400ox;
+    min-width: 360px;
+    border: 1px solid #e5e5e5;
+    background-color: #e1e1e1;
+    color: rgb(122, 122, 122);
+    border-radius: 4px;
 }
 .column-header {
-    margin-right:20px;
-    background-color:#454545;
+    margin:0;
+    max-height:150px;
+    min-height: 100px;
+    background-color: #808080;
     color:white;
-}
-.column nav {
+    border-radius: 4px;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 10px;
+    flex-direction: column;
+    padding: 10px;
 }
-.column nav h2 {
-    color: white;
+
+.status-to-do {
+    background-color: #003559;
+  }
+  
+  .status-in-progress {
+    background-color: #dcb747;
+  }
+  
+  .status-done {
+    background-color: #28a98f;
+  }
+  
+.column-header h2 {
+    color: rgb(229, 229, 229);
     white-space: nowrap;
     margin: 0;
+}
+.column-status {
+    color: rgb(229, 229, 229);
+    margin-top: 5px;
 }
 .button-group {
     display: flex;
     justify-content: flex-end;
-    margin-top: 10px;
-}
-.create-card-form {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: rgb(145, 145, 145);
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    z-index: 999;
-}
-.form-container {
-    max-width: 400px;
-    min-width: 300px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    background-color:  rgb(169, 169, 169);
-    display: flex;
-    flex-direction: column;
-}
-.form-group {
-    margin-bottom: 15px;
-}
-.form-group label {
-    display: block;
-    margin-bottom: 5px;
-}
-.form-group input, .form-group select {
-    width: 100%;
-    padding: 10px;
-    box-sizing: border-box;
-}
-.dialog-title {
-    color: white;
-    padding-top: 10px;
-    text-align: center;
-}
-.button-container {
-    display: flex;
-}
-.submit_btn, .cancel_btn {
-      color: white;
-}
-.form-buttons {
-    display: flex;
-    justify-content: flex-end;
-}
-.alert {
-    color: rgb(255, 41, 4);
+    margin-bottom: 10px;
   }
+.delete-column,
+.create-card{
+    background-color: transparent;
+    border: 1px solid #c5c5c5;
+    /* color: rgb(122, 122, 122); */
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.delete-column{
+    color: rgb(229, 229, 229);
+}

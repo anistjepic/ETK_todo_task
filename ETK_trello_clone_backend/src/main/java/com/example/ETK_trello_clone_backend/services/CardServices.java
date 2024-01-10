@@ -50,6 +50,7 @@ public class CardServices {
                         .cardId(c.getCardId())
                         .cardName(c.getCardName())
                         .cardDescription(c.getCardDescription())
+                        .cardOwner(c.getCardOwner())
                         .build();
                 returnCards.add(card);
             }

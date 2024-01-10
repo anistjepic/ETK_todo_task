@@ -1,0 +1,34 @@
+header {
+    background-color: #e5e5e5;
+    border-bottom: 2px solid #c5c5c5;
+    color: rgb(122, 122, 122);
+    font-size: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px 20px;
+    min-width: 900px;
+}
+
+header h1 {
+    margin: 0;
+    margin-right: auto;
+    width: fit-content;
+    cursor: pointer;
+}
+
+header h1:hover {
+    background-color: #dbdbdb;
+    border-radius: 4px;
+}
+
+.create-board,
+.find-board {
+    background-color: transparent;
+    border: 1px solid #c5c5c5;
+    color: rgb(122, 122, 122) !important;
+    padding: 8px 16px;
+    border-radius: 4px;
+    margin-right: 10px;
+    cursor: pointer;
+}

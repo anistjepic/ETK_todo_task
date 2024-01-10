@@ -1,0 +1,22 @@
+<div class="create-board-form" *ngIf="showCreateForm">
+    <h1 mat-dialog-title class="dialog-title">Create new board</h1>
+
+    <form #createForm="ngForm" (ngSubmit)="createBoard(createForm.value)">
+        <div mat-dialog-content class="form-container">
+            <div class="form-group">
+                <label for="boardName">Board name:</label><br>
+                <input type="text" id="inputField" name="boardName" placeholder="Enter board name"
+                    [(ngModel)]="boardName" required><br>
+            </div>
+            <div class="alert"
+                *ngIf="createForm.controls['boardName']?.touched && createForm.controls['boardName']?.invalid">Board
+                name is required...</div>
+            <br>
+            <div class="form-buttons">
+                <button mat-button class="submit_btn" type="submit" [disabled]="createForm.invalid"
+                    (click)="submit(createForm.value)">Submit</button>
+                <button mat-button class="cancel_btn" (click)="cancelForm()">Cancel</button>
+            </div>
+        </div>
+    </form>
+</div>

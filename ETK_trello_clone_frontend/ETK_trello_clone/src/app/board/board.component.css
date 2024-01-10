@@ -11,8 +11,10 @@
 }
 .columns-container {
   display: flex;
+  gap: 0;
+  margin: 0;
+  padding: 0;
 }
 .columns {
-  flex: 1 1 350px;
   padding: 10px;
 }

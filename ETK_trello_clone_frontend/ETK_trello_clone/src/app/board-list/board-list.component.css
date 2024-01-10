@@ -1,9 +1,97 @@
-.columns-container {
-    display: flex;
-  }
-  .columns {
-    flex: 1;
-    padding: 10px;
-    height: 100%;
-    max-width: 350px;
-  }
+header {
+  background-color: #e5e5e5;
+  border-bottom: 2px solid #c5c5c5;
+  color: rgb(122, 122, 122);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 4px 10px;
+  min-width: 900px;
+}
+
+header h1 {
+  margin: 0;
+  margin-right: auto;
+  margin-left: auto;
+  display: inline-block;
+}
+
+.boards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 20px;
+  padding: 20px;
+}
+
+.board-box {
+  width: 170px;
+  height: 120px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #b0b0b0;
+}
+
+.board-box:hover {
+  background-color: rgb(148, 148, 148);
+}
+
+.board-name {
+  text-align: center;
+  width: 100%;
+  height: 75px;
+  color: #494949;
+  font-size: 30px;
+  margin: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.board-name span {
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  height: 30px;
+  width: 100%;
+  justify-content: right;
+  margin: 5px;
+  padding-right: 5px;
+}
+
+.edit-button,
+.delete-button {
+  background-color: transparent;
+  border: 1px solid #818181;
+  color: #494949;
+  border-radius: 4px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.add-board {
+  width: 120px;
+  height: 120px;
+  border: 1px solid #ccc;
+  background-color: #cfcece;
+  color: #7c7c7c;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.add-board:hover {
+  background-color: #b0b0b0;
+}
+
+.add-board .plus-icon {
+  font-size: 50px;
+}

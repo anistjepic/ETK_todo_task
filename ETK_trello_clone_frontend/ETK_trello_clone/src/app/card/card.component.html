@@ -1,17 +1,19 @@
 <mat-card class="card">
-    <mat-card-header>
-      <mat-card-subtitle>Card name:</mat-card-subtitle>
+  <mat-card-header class="card-header">
+    <div class="card-name">
       <mat-card-title>{{ card?.cardName }}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <mat-card-subtitle>Description:</mat-card-subtitle>
-      <p>{{ card?.cardDescription }}</p>
-      <mat-card-subtitle>Card owner:</mat-card-subtitle>
-      <p>{{ card?.cardOwner}}</p>
-      <mat-divider></mat-divider>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button class="edit-card" (click)="card && toggleEditForm(card)">Edit</button>
-      <button mat-button class="delete-card" (click)="card && deleteCard(card)">Delete</button>
-    </mat-card-actions>
-  </mat-card> 
+    </div>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-card-subtitle class="card-description">Description:</mat-card-subtitle>
+    <p>{{ card?.cardDescription }}</p>
+    <mat-card-subtitle class="card-owner">Card owner:</mat-card-subtitle>
+    <p>{{ card?.cardOwner || 'No owner specified' }}</p>
+    <mat-divider></mat-divider>
+  </mat-card-content>
+  <mat-card-actions class="custom-card-actions">
+    <!-- <button mat-button class="edit-card" (click)="card && toggleEditForm(card)">Edit</button> -->
+    <button mat-button class="edit-card" (click)="toggleEditForm(column!,card!)">Edit</button>
+    <button mat-button class="delete-card" (click)="card && deleteCard(card)">Delete</button>
+  </mat-card-actions>
+</mat-card>

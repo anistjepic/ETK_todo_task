@@ -25,13 +25,24 @@ public class BoardServices {
 
     public Board createBoard(Board board) { return boardRepo.save(board); }
 
-    public Iterable<Board> getAllBoards() { return boardRepo.findAll(); }
+    public Iterable<Board> getAllBoards() {
+        List<Board> board = boardRepo.findAll();
+        if(board.isEmpty()) {
+            return new ArrayList<>();
+        }
+        return board;
+    }
 
     public Board updateBoard(Board board) {
         return boardRepo.save(board);
     }
 
     public void deleteBoard(Long id) { boardRepo.deleteById(id); }
+
+    public Board getBoardByBoardId(Long id) {
+        return boardRepo.findByBoardId(id)
+                .orElseThrow(() -> new NotFoundException("Board with id: " + id + " doesn't exist!"));
+    }
 
     public Board getBoardByBoardName(String name) {
         return boardRepo.findByBoardName(name)

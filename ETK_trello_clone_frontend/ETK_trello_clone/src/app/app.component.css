@@ -1,16 +1,4 @@
-.main-container {
-    display: flex;
-    height: 100vh;
-}
-.menu {
-    display: inline;
-    background-color:#454545;
-    color:white;
-    font-size:18px;
-    padding:5px;
-}
-.column-board {
-    flex: 10;
-    background-color:#454545;
-    color:white;
-}
+.main-content {
+    height: 92vh; 
+    background-color: #d6d6d6;
+  }

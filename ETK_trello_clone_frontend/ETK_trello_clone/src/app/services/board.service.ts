@@ -10,13 +10,21 @@ import { Observable } from 'rxjs';
 export class BoardService {
 
   private apiServerUrl = environment.apiUrl + "/boards";
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
-  getBoards() : Observable<Board[]> {
+  getBoards(): Observable<Board[]> {
     return this.http.get<Board[]>(this.apiServerUrl);
   }
+
   createBoard(board: Board): Observable<Board> {
     return this.http.post<Board>(`http://localhost:8080/boards/createBoard`, board);
   }
-  
+
+  getBoardByBoardId(boardId: number): Observable<Board> {
+    const boardUrl = `http://localhost:8080/boards/getBoard/${boardId}`;
+    //original
+    // return this.http.get<Board>(boardUrl);
+
+    return this.http.get<{ board: Board, boardName: string }>(boardUrl);
+  }
 }

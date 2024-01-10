@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ColumnService } from '../services/column.service';
 import { Column } from '../models/column';
-import {HttpErrorResponse } from '@angular/common/http';
+import { Board } from '../models/board';
 
 @Component({
   selector: 'app-board-item',
@@ -11,27 +11,12 @@ import {HttpErrorResponse } from '@angular/common/http';
 })
 export class BoardItemComponent implements OnInit {
 
-  Columns: Column[] = [];
+  Boards: Board[] = [];
 
-  constructor (private ColumnService: ColumnService) {}
-  
+  constructor(private columnService: ColumnService) {}
+
   ngOnInit(): void {
-    // this.getColumns();
-  }
-  
-  // public getColumns(): void {
-  //   this.ColumnService.getColumns().subscribe(
-  //     (response: Column[]) => {
-  //       this.Columns = response;
-  //     },
-  //     (error: HttpErrorResponse) => {
-  //       alert(error.message);
-  //     }
-  //   );
-  // }
 
-  // onColumnDeleted(deletedColumn: Column): void {
-  //   this.Columns = this.Columns.filter(column => column.columnId !== deletedColumn.columnId);
-  // }
+  }
 }
 

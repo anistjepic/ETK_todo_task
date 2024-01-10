@@ -22,7 +22,6 @@ public class Card {
     private String cardName;
     private String cardDescription;
     private String cardOwner;
-
     private String status;
 
     @ToString.Exclude
