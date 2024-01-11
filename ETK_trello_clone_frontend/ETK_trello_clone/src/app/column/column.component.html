@@ -1,7 +1,7 @@
 <div class=".column-container">
     <div class="column">
         <nav>
-            <div class="column-header"  [ngClass]="getColumnHeaderClass()">
+            <div class="column-header" [ngClass]="getColumnHeaderClass()">
                 <div class="column-title">
                     <h2>{{ column.columnTitle }}</h2>
                 </div>
@@ -16,7 +16,7 @@
         </nav>
         <ng-container class="cards" *ngFor="let card of cards">
             <app-card [column]="column" [card]="card" (cardDeleted)="onCardDeleted($event)"
-            (cardEdited)="openEditDialog($event)"></app-card>
+                (cardEdited)="openEditDialog($event)"></app-card>
         </ng-container>
         <div class="button-group">
             <button mat-button class="create-card" (click)="addCard()">Add card</button>

@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { BoardService } from '../services/board.service';
 import { Board } from '../models/board';
-import { BoardSharedService } from '../services/board-shared.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { CreateBoardComponent } from '../create-board/create-board.component';
+import { FindBoardComponent } from '../find-board/find-board.component';
+import { EditBoardComponent } from '../edit-board/edit-board.component';
 
 @Component({
   selector: 'app-board-list',
@@ -12,33 +15,56 @@ import { Router } from '@angular/router';
   providers: [BoardService],
 })
 export class BoardListComponent implements OnInit {
-
   boards: Board[] = [];
-  boardName: string = "";
+  boardName: string = '';
   board?: Board;
-  newBoard: Board | null = null;
 
-  constructor (private boardSharedService: BoardSharedService,
+  constructor(
     private boardService: BoardService,
-    private router: Router) {}
-  
-  ngOnInit(): void {
-    console.log("board-list");
-    // this.boardSharedService.newBoard$.subscribe((board: Board | null) => {
-    //   this.newBoard = board;
-    // });
+    public dialog: MatDialog,
+    private router: Router
+  ) {}
 
+  ngOnInit(): void {
     this.boardService.getBoards().subscribe((boards: Board[]) => {
       this.boards = boards;
     });
   }
 
+  onCreateBoard(createFlag: boolean) {
+    if (createFlag) {
+      this.addBoard();
+    } else {
+      console.error('Error creating new board');
+    }
+  }
+
+  onFindBoard(findFlag: boolean) {
+    if (findFlag) {
+      const dialogRef = this.dialog
+        .open(FindBoardComponent)
+        .afterClosed()
+        .subscribe((newBoard) => {
+          if (newBoard != undefined && newBoard.boardName != '') {
+            this.boardService.getBoardByName(newBoard.boardName).subscribe(
+              (response: Board) => {
+                console.log('Board found successfully:', response);
+                this.boards = [response];
+              },
+              (error) => {
+                console.error('Error finding board:', error);
+                this.boards = [];
+              }
+            );
+          } else this.getBoards();
+        });
+    }
+  }
+
   getBoards(): void {
-    console.log("getBoards(iz board-list)")
     this.boardService.getBoards().subscribe(
       (response: Board[]) => {
         this.boards = response;
-        console.log('Boards:', this.boards);
         if (this.boards && this.boards.length > 0) {
           this.boardName = this.boards[0].boardName;
         }
@@ -60,33 +86,75 @@ export class BoardListComponent implements OnInit {
     );
   }
 
-  // onCreateBoard(board: Board): void {
-  //   console.log("novo board: ", board);
-
-  //   this.boardService.createBoard(board).subscribe(
-  //     (response: Board) => {
-  //       console.log('Board created successfully:', response);
-  //       this.getBoardByBoardId(board.boardId!);
-  //     },
-  //     (error) => {
-  //       console.error('Error creating board:', error);
-  //     }
-  //   );
-  // }
-
   onBoardClick(board: Board): void {
-    console.log('Clicked board:', board);
     this.router.navigate(['/board/', board.boardId]);
   }
 
-  onDeleteClick(_t11: Board) {
-    throw new Error('Method not implemented.');
+  onDeleteClick(deleteBoard: Board) {
+    if (deleteBoard.boardId) {
+      this.boardService.deleteBoard(deleteBoard.boardId!).subscribe(
+        (response: void) => {
+          console.log('Board deleted successfully:', response);
+          this.getBoards();
+        },
+        (error) => {
+          console.error('Error deleting board:', error);
+          this.getBoards();
+        }
+      );
+    } else {
+      console.error('Board is undefined.');
     }
-    onEditClick(_t11: Board) {
-    throw new Error('Method not implemented.');
-    }
-  
-    onAddBoardClick() {
-      throw new Error('Method not implemented.');
-      }
+  }
+
+  onEditClick(clickedBoard: Board) {
+    const dialogRef = this.dialog
+      .open(EditBoardComponent, {
+        data: this.board?.boardName,
+      })
+      .afterClosed()
+      .subscribe((editBoard) => {
+        if (editBoard != undefined && editBoard.boardName != '') {
+          this.boardService
+            .editBoardName(clickedBoard.boardName!, editBoard.boardName)
+            .subscribe(
+              (response: Board) => {
+                console.log('Board edited successfully:', response);
+                this.getBoards();
+              },
+              (error) => {
+                console.error('Error editing board:', error);
+              }
+            );
+        } else this.getBoards();
+      });
+  }
+
+  addBoard() {
+    const dialogRef = this.dialog
+      .open(CreateBoardComponent)
+      .afterClosed()
+      .subscribe((newBoard) => {
+        if (newBoard != undefined) {
+          this.boardService.createBoard(newBoard).subscribe(
+            (response: Board) => {
+              console.log('Board created successfully:', response);
+              this.getBoards();
+            },
+            (error) => {
+              console.error('Error creating board:', error);
+            }
+          );
+        } else {
+          this.getBoards();
+        }
+      });
+  }
+
+  calculateFontSize(text: string): number {
+    const maxLength = 10;
+    const baseFontSize = 30;
+    const fontSize = Math.max(baseFontSize - (text.length - maxLength) * 2, 20);
+    return fontSize;
+  }
 }

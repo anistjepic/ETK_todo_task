@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ColumnService } from '../services/column.service';
 import { Column } from '../models/column';
-import {HttpErrorResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Board } from '../models/board';
 import { ActivatedRoute } from '@angular/router';
 
@@ -16,7 +16,7 @@ export class BoardComponent implements OnInit {
   board!: Board;
   boardName!: string;
 
-  constructor(private columnService: ColumnService, private route: ActivatedRoute) {}
+  constructor(private columnService: ColumnService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -81,5 +81,24 @@ export class BoardComponent implements OnInit {
       }
     );
   }
-}
 
+  onFilterColumn(columnStatus: string) {
+    if (columnStatus != "") {
+      this.columnService.filterByStatus(columnStatus).subscribe(
+        (response: Column) => {
+          this.columns = [response];
+          console.log(response);
+        },
+        (error: HttpErrorResponse) => {
+          alert(error.message);
+        }
+      );
+    } else this.getColumnsByBoardId(this.board.boardId!);
+  }
+
+  onEditCard(flag: boolean) {
+    if (flag) {
+      this.getColumnsByBoardId(this.board.boardId!);
+    }
+  }
+}

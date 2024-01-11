@@ -1,9 +1,10 @@
+<app-main-header (onCreateBoard)="onCreateBoard($event)" (onFindBoard)="onFindBoard($event)"></app-main-header>
 <header>
   <h1>Created boards</h1>
 </header>
 <div class="boards-container">
   <div *ngFor="let board of boards" class="board-box">
-    <div class="board-name" (click)="onBoardClick(board)">
+    <div class="board-name" [style.fontSize.px]="calculateFontSize(board.boardName)" (click)="onBoardClick(board)">
       <span> {{ board.boardName }} </span>
     </div>
     <div class="button-container">
@@ -11,7 +12,7 @@
       <button class="delete-button" (click)="onDeleteClick(board)">Delete</button>
     </div>
   </div>
-  <div class="add-board" (click)="onAddBoardClick()">
+  <div class="add-board" (click)="addBoard()">
     <div class="plus-icon">+</div>
   </div>
 </div>

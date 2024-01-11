@@ -1,16 +1,12 @@
-<div class="create-board-form">
-    <h1 mat-dialog-title class="dialog-title">Create new board</h1>
+<div class="edit-board-form">
+    <h1 mat-dialog-title class="dialog-title">Edit board</h1>
     <form #createForm="ngForm" (ngSubmit)="submit(createForm.value)">
         <div mat-dialog-content class="form-container">
             <div class="form-group">
                 <label for="boardName">Board name:</label><br>
                 <input type="text" id="inputField" name="boardName" placeholder="Enter board name"
-                    [(ngModel)]="boardName" required><br>
+                    [(ngModel)]="boardName"><br>
             </div>
-            <div class="alert"
-                *ngIf="createForm.controls['boardName']?.touched && createForm.controls['boardName']?.invalid">Board
-                name is required...</div>
-            <br>
             <div class="form-buttons">
                 <button mat-button class="submit_btn" type="submit" [disabled]="createForm.invalid">Submit</button>
                 <button mat-button class="cancel_btn" type="button" (click)="cancelForm()">Cancel</button>

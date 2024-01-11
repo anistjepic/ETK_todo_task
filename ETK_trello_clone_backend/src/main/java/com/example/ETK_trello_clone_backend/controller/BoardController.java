@@ -5,7 +5,6 @@ import com.example.ETK_trello_clone_backend.model.Card;
 import com.example.ETK_trello_clone_backend.model.Column;
 import com.example.ETK_trello_clone_backend.services.BoardServices;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +16,6 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardController {
     private final BoardServices boardService;
-
 
     @GetMapping()
     public ResponseEntity<Iterable<Board>> getAllBoards() {
@@ -34,9 +32,16 @@ public class BoardController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
     @GetMapping("/{name}")
     public ResponseEntity<Board> getBoardByName(@PathVariable("name") String name) {
         Board board = boardService.getBoardByBoardName(name);
+        return new ResponseEntity<>(board, HttpStatus.OK);
+    }
+
+    @GetMapping("/{oldName}/{newName}")
+    public ResponseEntity<Board> editBoardName(@PathVariable("oldName") String oldName,@PathVariable("newName") String newName) {
+        Board board = boardService.editBoardName(oldName, newName);
         return new ResponseEntity<>(board, HttpStatus.OK);
     }
 

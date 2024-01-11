@@ -10,7 +10,7 @@ import { Observable } from 'rxjs';
 })
 export class ColumnService {
   private apiServerUrl = environment.apiUrl + "/columns";
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getColumns(boardId: number): Observable<Column[]> {
     return this.http.get<Column[]>(`${this.apiServerUrl}/getColumns/${boardId}`);
@@ -37,7 +37,7 @@ export class ColumnService {
     return this.http.get<Board[]>(boardsUrl);
   }
 
-  filterByStatus(columnStatus: string): Observable<Column[]> {
-    return this.http.get<Column[]>(this.apiServerUrl + "/" + columnStatus);
+  filterByStatus(status: string): Observable<Column> {
+    return this.http.get<Column>(`http://localhost:8080/columns/${status}`);
   }
 }

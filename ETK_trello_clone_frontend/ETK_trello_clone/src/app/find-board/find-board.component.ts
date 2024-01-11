@@ -7,21 +7,22 @@ import { FormGroup, FormsModule } from '@angular/forms';
 import { Board } from '../models/board';
 
 @Component({
-  selector: 'app-create-board',
+  selector: 'app-find-board',
   standalone: true,
   imports: [MatButtonModule, CardComponent, NgFor, NgIf, FormsModule],
-  templateUrl: './create-board.component.html',
-  styleUrl: './create-board.component.css',
+  templateUrl: './find-board.component.html',
+  styleUrl: './find-board.component.css',
 })
-export class CreateBoardComponent {
+export class FindBoardComponent {
   @Output() boardCreated = new EventEmitter<Board>();
 
   boards!: Board[];
   boardName: string = '';
+  showCreateForm: boolean = false;
 
   constructor(
     public dialog: MatDialog,
-    public dialogRef: MatDialogRef<CreateBoardComponent>
+    public dialogRef: MatDialogRef<FindBoardComponent>
   ) { }
 
   ngOnInit(): void { }

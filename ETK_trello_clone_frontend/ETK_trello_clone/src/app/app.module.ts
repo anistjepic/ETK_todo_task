@@ -12,9 +12,6 @@ import { BoardItemComponent } from './board-item/board-item.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainHeaderComponent } from './main-header/main-header.component';
 import { BoardHeaderComponent } from './board-header/board-header.component';
-import { CreateCardComponent } from './create-card/create-card.component';
-import { CreateBoardComponent } from './create-board/create-board.component';
-import { BoardSharedService } from './services/board-shared.service';
 
 @NgModule({
   declarations: [
@@ -22,21 +19,19 @@ import { BoardSharedService } from './services/board-shared.service';
     BoardComponent,
     BoardListComponent,
     BoardItemComponent
-    ],
+  ],
   imports: [
     BrowserModule,
     CardComponent,
     ColumnComponent,
     MenuComponent,
-    CreateCardComponent,
-    CreateBoardComponent,
     BoardHeaderComponent,
     MainHeaderComponent,
     HttpClientModule,
     AppRoutingModule,
     BrowserAnimationsModule
   ],
-  providers: [BoardSharedService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

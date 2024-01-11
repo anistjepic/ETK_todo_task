@@ -6,8 +6,9 @@
   margin: 10px;
   border: 1px solid #e0e0e0;
   border-radius: 4px;
-  color:#5d5d5d;
+  color: #5d5d5d;
 }
+
 .card-header {
   border: 1px solid #a3a3a3;
   background-color: #a3a3a3;
@@ -15,18 +16,22 @@
   border-radius: 4px;
   padding: 5px;
 }
+
 .card-name {
-text-align: center;
-width: 100%;
+  text-align: center;
+  width: 100%;
 }
+
 .mat-mdc-card-subtitle {
   font-size: 15px;
   color: #707070;
 }
+
 .custom-card-actions {
   display: flex;
   justify-content: flex-end;
 }
+
 .edit-card,
 .delete-card {
   background-color: transparent;
@@ -36,71 +41,4 @@ width: 100%;
   border-radius: 4px;
   margin-right: 10px;
   cursor: pointer;
-}
-.edit-card-form {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #e0dfdf;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  z-index: 999;
-  border-radius: 4px;
-}
-.form-container {
-  max-width: 400px;
-  min-width: 300px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  background: rgb(229, 229, 229);
-  display: flex;
-  flex-direction: column;
-  border-radius: 4px;
-}
-.form-group {
-  margin-bottom: 15px;
-}
-.form-group label {
-  display: block;
-  margin-bottom: 5px;
-}
-.form-group input,
-.form-group select {
-  width: 100%;
-  padding: 10px;
-  box-sizing: border-box;
-  border: 1px solid #c5c5c5;
-  border-radius: 4px;
-}
-.dialog-title {
-  color: rgb(122, 122, 122);
-  padding-top: 10px;
-  text-align: center;
-}
-.button-container {
-  display: flex;
-}
-.submit_btn,
-.cancel_btn {
-  background-color: transparent;
-  color: rgb(122, 122, 122) !important;
-  border: 1px solid #c5c5c5;
-  padding: 8px 16px;
-  border-radius: 4px;
-  cursor: pointer;
-  margin-left: 10px;
-}
-.submit_btn:hover,
-.cancel_btn:hover {
-  background-color: #e0dfdf;
-}
-.form-buttons {
-  display: flex;
-  justify-content: flex-end;
-}
-.alert {
-  color: rgb(254, 112, 68);
-  font-size: 15px;
 }

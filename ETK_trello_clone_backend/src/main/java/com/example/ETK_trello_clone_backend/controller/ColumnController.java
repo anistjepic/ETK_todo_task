@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -35,9 +36,8 @@ public class ColumnController {
     }
 
     @GetMapping("/{status}")
-    public ResponseEntity<List<Column>> getColumnsByStatus(@PathVariable("status") String status) {
-        List<Column> columns = columnService.geColumnByStatus(status);
-        return new ResponseEntity<>(columns, HttpStatus.OK);
+    public ResponseEntity<Column> getColumnsByStatus(@PathVariable("status") String status) {
+        return ResponseEntity.ok(columnService.getColumnByStatus(status));
     }
 
     @PostMapping("/createColumn")

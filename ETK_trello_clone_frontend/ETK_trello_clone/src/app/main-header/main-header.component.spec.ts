@@ -10,8 +10,8 @@ describe('HeaderComponent', () => {
     await TestBed.configureTestingModule({
       imports: [MainHeaderComponent]
     })
-    .compileComponents();
-    
+      .compileComponents();
+
     fixture = TestBed.createComponent(MainHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

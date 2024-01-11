@@ -1,6 +1,5 @@
 package com.example.ETK_trello_clone_backend.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,6 +33,4 @@ public class Column {
     @ToString.Exclude
     @OneToMany(mappedBy = "column", cascade = CascadeType.ALL)
     private List<Card> cards = new ArrayList<>();
-
-
 }

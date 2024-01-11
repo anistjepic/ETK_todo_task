@@ -27,7 +27,6 @@ public class ColumnServices {
     public Column createColumn (Column column) {
         Board board = column.getBoard();
         List<Column> columns = columnRepo.findByBoard(board);
-
         boolean noColumnWithSameName = columns.stream()
                 .noneMatch(c -> c.getColumnStatus().equalsIgnoreCase(column.getColumnStatus()));
 
@@ -38,14 +37,20 @@ public class ColumnServices {
         }
     }
 
-    public List<Column> geColumnByStatus (String status) {
-        return columnRepo.findByColumnStatus(status)
-                .orElseThrow(() -> new NotFoundException("Task column with status: " + status + " doesn't exist!"));
+    public Column getColumnByStatus(String status) {
+        Optional<Column> column = columnRepo.findByColumnStatus(status);
+
+        if(column.isPresent()) {
+            return Column.builder()
+                    .columnTitle(column.get().getColumnTitle())
+                    .columnStatus(column.get().getColumnStatus())
+                    .columnId(column.get().getColumnId()).build();
+        }
+        return null;
     }
 
     public Iterable<Column> getAllColumns (Long boardId) {
         Optional<Board> board = boardRepo.findById(boardId);
-        // napravi exception ili nesto
 
         if(board != null) {
             List<Column> columns =  columnRepo.findByBoard(board.get());
@@ -63,15 +68,13 @@ public class ColumnServices {
         else {
             return new ArrayList<>();
         }
-
     }
     public Optional<Column> getColumnById(Long id) {
         return columnRepo.findById(id);
     }
 
     @PostMapping("/updateColumn")
-    public Column updateColumn(@RequestBody Column column)
-    {
+    public Column updateColumn(@RequestBody Column column) {
         Optional<Column> oldColumn = columnRepo.findById(column.columnId);
         if (oldColumn.isEmpty()) {
             return null;

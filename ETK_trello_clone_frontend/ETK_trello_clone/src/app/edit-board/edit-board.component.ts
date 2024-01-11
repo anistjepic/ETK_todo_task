@@ -1,27 +1,22 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
-import { CardComponent } from '../card/card.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NgFor, NgIf } from '@angular/common';
 import { FormGroup, FormsModule } from '@angular/forms';
-import { Board } from '../models/board';
 
 @Component({
-  selector: 'app-create-board',
+  selector: 'app-edit-board',
   standalone: true,
-  imports: [MatButtonModule, CardComponent, NgFor, NgIf, FormsModule],
-  templateUrl: './create-board.component.html',
-  styleUrl: './create-board.component.css',
+  imports: [MatButtonModule, NgFor, NgIf, FormsModule],
+  templateUrl: './edit-board.component.html',
+  styleUrl: './edit-board.component.css',
 })
-export class CreateBoardComponent {
-  @Output() boardCreated = new EventEmitter<Board>();
-
-  boards!: Board[];
+export class EditBoardComponent {  
   boardName: string = '';
 
   constructor(
     public dialog: MatDialog,
-    public dialogRef: MatDialogRef<CreateBoardComponent>
+    public dialogRef: MatDialogRef<EditBoardComponent>
   ) { }
 
   ngOnInit(): void { }

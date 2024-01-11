@@ -9,7 +9,7 @@ import { environment } from '../../environment/environment';
 })
 export class CardService {
   private apiServerUrl = environment.apiUrl + "/cards";
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   getCards(columnId: number): Observable<Card[]> {
     return this.http.get<Card[]>(`${this.apiServerUrl}/getCards/${columnId}`);
@@ -26,5 +26,4 @@ export class CardService {
   editCard(card: Card): Observable<Card> {
     return this.http.put<Card>(`${this.apiServerUrl}/${card.cardId}`, card);
   }
-
 }

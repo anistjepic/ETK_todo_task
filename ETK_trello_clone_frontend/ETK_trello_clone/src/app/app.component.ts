@@ -8,6 +8,6 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AppComponent {
   title = 'ETK-trello-clone';
-  constructor(private http:HttpClient){
+  constructor(private http: HttpClient) {
   }
 }

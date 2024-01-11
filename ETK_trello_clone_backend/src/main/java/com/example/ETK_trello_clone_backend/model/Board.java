@@ -11,7 +11,6 @@ import lombok.ToString;
 import java.util.ArrayList;
 import java.util.List;
 
-
 @Entity
 @Data
 @Table(name = "board")
@@ -28,5 +27,4 @@ public class Board {
     @ToString.Exclude
     @OneToMany(mappedBy = "board", cascade = CascadeType.ALL)
     private List<Column> columns = new ArrayList<>();
-
 }

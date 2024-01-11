@@ -20,11 +20,25 @@ export class BoardService {
     return this.http.post<Board>(`http://localhost:8080/boards/createBoard`, board);
   }
 
+  getBoardByName(name: string): Observable<Board> {
+    const boardUrl = `http://localhost:8080/boards/${name}`;
+    return this.http.get<Board>(boardUrl);
+  }
+
+  editBoardName(oldName: string, newName: string): Observable<Board> {
+    const boardUrl = `http://localhost:8080/boards/${oldName}/${newName}`;
+    return this.http.get<Board>(boardUrl);
+  }
+
+
   getBoardByBoardId(boardId: number): Observable<Board> {
     const boardUrl = `http://localhost:8080/boards/getBoard/${boardId}`;
-    //original
-    // return this.http.get<Board>(boardUrl);
 
     return this.http.get<{ board: Board, boardName: string }>(boardUrl);
+  }
+
+  deleteBoard(boardId: number): Observable<void> {
+    const boardUrl = `http://localhost:8080/boards/${boardId}`
+    return this.http.delete<void>(boardUrl);
   }
 }

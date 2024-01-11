@@ -1,58 +1,63 @@
 .column {
-    max-width: 400ox;
-    min-width: 360px;
-    border: 1px solid #e5e5e5;
-    background-color: #e1e1e1;
-    color: rgb(122, 122, 122);
-    border-radius: 4px;
+  max-width: 400ox;
+  min-width: 360px;
+  border: 1px solid #e5e5e5;
+  background-color: #e1e1e1;
+  color: rgb(122, 122, 122);
+  border-radius: 4px;
 }
+
 .column-header {
-    margin:0;
-    max-height:150px;
-    min-height: 100px;
-    background-color: #808080;
-    color:white;
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    padding: 10px;
+  margin: 0;
+  max-height: 150px;
+  min-height: 100px;
+  background-color: #808080;
+  color: white;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
 }
 
 .status-to-do {
-    background-color: #003559;
-  }
-  
-  .status-in-progress {
-    background-color: #dcb747;
-  }
-  
-  .status-done {
-    background-color: #28a98f;
-  }
-  
+  background-color: #003559;
+}
+
+.status-in-progress {
+  background-color: #dcb747;
+}
+
+.status-done {
+  background-color: #28a98f;
+}
+
 .column-header h2 {
-    color: rgb(229, 229, 229);
-    white-space: nowrap;
-    margin: 0;
+  color: rgb(229, 229, 229);
+  white-space: nowrap;
+  margin: 0;
 }
+
 .column-status {
-    color: rgb(229, 229, 229);
-    margin-top: 5px;
+  color: rgb(229, 229, 229);
+  margin-top: 5px;
 }
+
 .button-group {
-    display: flex;
-    justify-content: flex-end;
-    margin-bottom: 10px;
-  }
-.delete-column,
-.create-card{
-    background-color: transparent;
-    border: 1px solid #c5c5c5;
-    /* color: rgb(122, 122, 122); */
-    border-radius: 4px;
-    margin-right: 10px;
-    cursor: pointer;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
 }
-.delete-column{
-    color: rgb(229, 229, 229);
+
+.delete-column,
+.create-card {
+  background-color: transparent;
+  border: 1px solid #c5c5c5;
+  color: rgb(122, 122, 122);
+  border-radius: 4px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.delete-column {
+  color: rgb(229, 229, 229);
 }

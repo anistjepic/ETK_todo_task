@@ -1,22 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ColumnService } from '../services/column.service';
-import { Column } from '../models/column';
-import { Board } from '../models/board';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-board-item',
   templateUrl: './board-item.component.html',
   styleUrls: ['./board-item.component.css'],
-  providers: [ColumnService]
+  providers: []
 })
-export class BoardItemComponent implements OnInit {
+export class BoardItemComponent {
 
-  Boards: Board[] = [];
-
-  constructor(private columnService: ColumnService) {}
-
-  ngOnInit(): void {
-
-  }
+  constructor() { }
 }
-

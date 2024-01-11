@@ -1,5 +1,6 @@
 <header>
-    <h1>{{ boardName }}</h1>
-    <button mat-button class="edit-board">Edit board name</button>
-    <button mat-button class="delete-board">Delete board</button>
+    <h1 class="app-name" (click)="onClickGoBackToMainPage()">To Do Application</h1>
+    <div class="board-name-container">
+        <h1 class="board-name">{{ boardName }}</h1>
+    </div>
 </header>
