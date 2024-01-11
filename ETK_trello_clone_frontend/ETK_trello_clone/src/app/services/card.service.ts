@@ -8,22 +8,23 @@ import { environment } from '../../environment/environment';
   providedIn: 'root'
 })
 export class CardService {
-  private apiServerUrl = environment.apiUrl + "/cards";
+  private cardsUrl = environment.apiUrl + "/cards";
+
   constructor(private http: HttpClient) { }
 
   getCards(columnId: number): Observable<Card[]> {
-    return this.http.get<Card[]>(`${this.apiServerUrl}/getCards/${columnId}`);
+    return this.http.get<Card[]>(`${this.cardsUrl}/getCards/${columnId}`);
   }
 
   createCard(card: Card): Observable<Card> {
-    return this.http.post<Card>(this.apiServerUrl, card);
+    return this.http.post<Card>(this.cardsUrl, card);
   }
 
   deleteCard(cardId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/${cardId}`);
+    return this.http.delete<void>(`${this.cardsUrl}/${cardId}`);
   }
 
   editCard(card: Card): Observable<Card> {
-    return this.http.put<Card>(`${this.apiServerUrl}/${card.cardId}`, card);
+    return this.http.put<Card>(`${this.cardsUrl}/${card.cardId}`, card);
   }
 }

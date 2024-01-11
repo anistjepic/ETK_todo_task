@@ -7,8 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-
 @RestController
 @RequestMapping("/cards")
 @CrossOrigin(origins = "http://localhost:4200")
@@ -23,24 +21,6 @@ public class CardController {
     @GetMapping("/getCards/{columnId}")
     public ResponseEntity<Iterable<Card>> getAllCards(@PathVariable("columnId") Long columnId) {
         Iterable<Card> cards = cardService.getAllCards(columnId);
-        return new ResponseEntity<>(cards, HttpStatus.OK);
-    }
-
-    @GetMapping("/{name}")
-    public ResponseEntity<Card> getCardByCardName(@PathVariable("name") String name) {
-        Card card = cardService.getCardByCardName(name);
-        return new ResponseEntity<>(card, HttpStatus.OK);
-    }
-
-    @GetMapping("/{owner}")
-    public ResponseEntity<List<Card>> getCardsByOwner(@PathVariable("owner") String owner) {
-        List<Card> cards = cardService.getCardsByOwner(owner);
-        return new ResponseEntity<>(cards, HttpStatus.OK);
-    }
-
-    @GetMapping("/{state}")
-    public ResponseEntity<List<Card>> getCardsByStatus(@PathVariable("status") String status) {
-        List<Card> cards = cardService.getCardsByStatus(status);
         return new ResponseEntity<>(cards, HttpStatus.OK);
     }
 

@@ -81,4 +81,10 @@ public class BoardController {
         List<Card> cards = boardService.getAllCards(boardId, columnId);
         return new ResponseEntity<>(cards, HttpStatus.OK);
     }
+
+    @GetMapping("/checkBoardName/{boardName}")
+    public ResponseEntity<Boolean> checkIfBoardNameExists(@PathVariable("boardName") String boardName) {
+        Boolean ifBoardExist = boardService.checkIfBoardNameExists(boardName);
+        return new ResponseEntity<>(ifBoardExist, HttpStatus.OK);
+    }
 }

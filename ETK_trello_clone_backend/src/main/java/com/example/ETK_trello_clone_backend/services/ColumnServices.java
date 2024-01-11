@@ -4,12 +4,9 @@ import com.example.ETK_trello_clone_backend.NotFoundException;
 import com.example.ETK_trello_clone_backend.model.Board;
 import com.example.ETK_trello_clone_backend.model.Card;
 import com.example.ETK_trello_clone_backend.model.Column;
-//import com.example.ETK_trello_clone_backend.repository.BoardRepo;
-//import com.example.ETK_trello_clone_backend.repository.ColumnRepo;
 import com.example.ETK_trello_clone_backend.repository.BoardRepo;
 import com.example.ETK_trello_clone_backend.repository.ColumnRepo;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -68,9 +65,6 @@ public class ColumnServices {
         else {
             return new ArrayList<>();
         }
-    }
-    public Optional<Column> getColumnById(Long id) {
-        return columnRepo.findById(id);
     }
 
     @PostMapping("/updateColumn")

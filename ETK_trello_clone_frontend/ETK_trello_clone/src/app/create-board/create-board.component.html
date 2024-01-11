@@ -10,9 +10,11 @@
             <div class="alert"
                 *ngIf="createForm.controls['boardName']?.touched && createForm.controls['boardName']?.invalid">Board
                 name is required...</div>
+            <div class="alert" *ngIf="boardNameExists">Board name already exists...</div>
             <br>
             <div class="form-buttons">
-                <button mat-button class="submit_btn" type="submit" [disabled]="createForm.invalid">Submit</button>
+                <button mat-button class="submit_btn" type="submit"
+                    [disabled]="createForm.invalid || boardNameExists">Submit</button>
                 <button mat-button class="cancel_btn" type="button" (click)="cancelForm()">Cancel</button>
             </div>
         </div>

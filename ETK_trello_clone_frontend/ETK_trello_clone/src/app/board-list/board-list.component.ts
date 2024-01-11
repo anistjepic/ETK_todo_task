@@ -23,7 +23,7 @@ export class BoardListComponent implements OnInit {
     private boardService: BoardService,
     public dialog: MatDialog,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.boardService.getBoards().subscribe((boards: Board[]) => {
@@ -44,12 +44,14 @@ export class BoardListComponent implements OnInit {
       const dialogRef = this.dialog
         .open(FindBoardComponent)
         .afterClosed()
-        .subscribe((newBoard) => {
-          if (newBoard != undefined && newBoard.boardName != '') {
-            this.boardService.getBoardByName(newBoard.boardName).subscribe(
+        .subscribe((searchBoard) => {
+          if (searchBoard != undefined && searchBoard.boardName != '') {
+            this.boardService.getBoardByName(searchBoard.boardName).subscribe(
               (response: Board) => {
-                console.log('Board found successfully:', response);
-                this.boards = [response];
+                if(response) {
+                  console.log('Board found successfully:', response);
+                  this.boards = [response];
+                } else this.boards = [];
               },
               (error) => {
                 console.error('Error finding board:', error);

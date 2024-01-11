@@ -10,11 +10,8 @@ import java.util.Optional;
 
 @Repository
 public interface ColumnRepo extends JpaRepository<Column, Long> {
-    Optional<Column> findByColumnTitle(String name);
 
     List<Column> findByBoard(Board board);
 
     Optional<Column> findByColumnStatus(String status);
-
-    Optional<Column> findByColumnId(Long id);
 }

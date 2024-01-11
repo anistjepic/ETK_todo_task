@@ -4,6 +4,7 @@ import { Column } from '../models/column';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Board } from '../models/board';
 import { ActivatedRoute } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-board',
@@ -16,7 +17,9 @@ export class BoardComponent implements OnInit {
   board!: Board;
   boardName!: string;
 
-  constructor(private columnService: ColumnService, private route: ActivatedRoute) { }
+  constructor(private columnService: ColumnService,
+    private route: ActivatedRoute,
+    public dialog: MatDialog,) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {

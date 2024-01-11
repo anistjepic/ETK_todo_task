@@ -16,7 +16,9 @@ import java.util.List;
 public class BoardServices {
     private final BoardRepo boardRepo;
 
-    public Board createBoard(Board board) { return boardRepo.save(board); }
+    public Board createBoard(Board board) {
+        return boardRepo.save(board);
+    }
 
     public Iterable<Board> getAllBoards() {
         List<Board> board = boardRepo.findAll();
@@ -38,8 +40,12 @@ public class BoardServices {
     }
 
     public Board getBoardByBoardName(String name) {
-        return boardRepo.findByBoardName(name)
-                .orElseThrow(() -> new NotFoundException("Board with name: " + name + " doesn't exist!"));
+//        boolean ifBoardDontExists = checkIfBoardNameExists(name);
+        if (!checkIfBoardNameExists(name)) {
+            return boardRepo.findByBoardName(name)
+                    .orElseThrow(() -> new NotFoundException("Board with name: " + name + " doesn't exist!"));
+        }
+        return null;
     }
 
     public Board editBoardName(String oldName, String newName) {
@@ -57,5 +63,11 @@ public class BoardServices {
 
     public List<Card> getAllCards(Long boardId, Long taskColumnId) {
         return new ArrayList<>();
+    }
+
+    public boolean checkIfBoardNameExists(String boardName) {
+        List<Board> boards = boardRepo.findAll();
+        return boards.stream()
+                .noneMatch(b -> b.getBoardName().equalsIgnoreCase(boardName));
     }
 }

@@ -9,35 +9,28 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ColumnService {
-  private apiServerUrl = environment.apiUrl + "/columns";
+  private columnsUrl = environment.apiUrl + "/columns";
+  private boardsUrl = environment.apiUrl + "/boards";
+
   constructor(private http: HttpClient) { }
 
   getColumns(boardId: number): Observable<Column[]> {
-    return this.http.get<Column[]>(`${this.apiServerUrl}/getColumns/${boardId}`);
+    return this.http.get<Column[]>(`${this.columnsUrl}/getColumns/${boardId}`);
   }
 
   createColumn(column: Column): Observable<Column> {
-    return this.http.post<Column>(`http://localhost:8080/columns/createColumn`, column);
+    return this.http.post<Column>(`${this.columnsUrl}/createColumn`, column);
   }
 
   deleteColumn(columnId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiServerUrl}/${columnId}`);
+    return this.http.delete<void>(`${this.columnsUrl}/${columnId}`);
   }
 
   getBoard(boardId: number): Observable<Board | undefined> {
-    const boardUrl = `http://localhost:8080/boards/getBoard/${boardId}`;
-    //original
-    // return this.http.get<Board>(boardUrl);
-
-    return this.http.get<{ board: Board, boardName: string }>(boardUrl);
-  }
-
-  getBoards(): Observable<Board[]> {
-    const boardsUrl = 'http://localhost:8080/getBoards';
-    return this.http.get<Board[]>(boardsUrl);
+    return this.http.get<{ board: Board, boardName: string }>(`${this.boardsUrl}/getBoard/${boardId}`);
   }
 
   filterByStatus(status: string): Observable<Column> {
-    return this.http.get<Column>(`http://localhost:8080/columns/${status}`);
+    return this.http.get<Column>(`${this.columnsUrl}/${status}`);
   }
 }

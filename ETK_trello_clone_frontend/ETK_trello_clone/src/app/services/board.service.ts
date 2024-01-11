@@ -8,37 +8,35 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class BoardService {
+  private boardsUrl = environment.apiUrl + "/boards";
 
-  private apiServerUrl = environment.apiUrl + "/boards";
   constructor(private http: HttpClient) { }
 
   getBoards(): Observable<Board[]> {
-    return this.http.get<Board[]>(this.apiServerUrl);
+    return this.http.get<Board[]>(this.boardsUrl);
   }
 
   createBoard(board: Board): Observable<Board> {
-    return this.http.post<Board>(`http://localhost:8080/boards/createBoard`, board);
+    return this.http.post<Board>(`${this.boardsUrl}/createBoard`, board);
   }
 
   getBoardByName(name: string): Observable<Board> {
-    const boardUrl = `http://localhost:8080/boards/${name}`;
-    return this.http.get<Board>(boardUrl);
+    return this.http.get<Board>(`${this.boardsUrl}/${name}`);
   }
 
   editBoardName(oldName: string, newName: string): Observable<Board> {
-    const boardUrl = `http://localhost:8080/boards/${oldName}/${newName}`;
-    return this.http.get<Board>(boardUrl);
+    return this.http.get<Board>(`${this.boardsUrl}/${oldName}/${newName}`);
   }
 
-
   getBoardByBoardId(boardId: number): Observable<Board> {
-    const boardUrl = `http://localhost:8080/boards/getBoard/${boardId}`;
-
-    return this.http.get<{ board: Board, boardName: string }>(boardUrl);
+    return this.http.get<{ board: Board, boardName: string }>(`${this.boardsUrl}/getBoard/${boardId}`);
   }
 
   deleteBoard(boardId: number): Observable<void> {
-    const boardUrl = `http://localhost:8080/boards/${boardId}`
-    return this.http.delete<void>(boardUrl);
+    return this.http.delete<void>(`${this.boardsUrl}/${boardId}`);
+  }
+
+  checkIfBoardNameExists(boardName: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.boardsUrl}/checkBoardName/${boardName}`);
   }
 }

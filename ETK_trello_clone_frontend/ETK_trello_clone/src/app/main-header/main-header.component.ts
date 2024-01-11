@@ -21,7 +21,6 @@ export class MainHeaderComponent implements OnInit {
 
   boards: Board[] = [];
   boardName: string = '';
-  boardCreatedSubscription: Subscription | undefined;
 
   constructor(public dialog: MatDialog) { }
 

@@ -2,7 +2,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { NgFor, NgIf } from '@angular/common';
-import { FormGroup, FormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { BoardService } from '../services/board.service';
 
 @Component({
   selector: 'app-edit-board',
@@ -11,10 +12,12 @@ import { FormGroup, FormsModule } from '@angular/forms';
   templateUrl: './edit-board.component.html',
   styleUrl: './edit-board.component.css',
 })
-export class EditBoardComponent {  
+export class EditBoardComponent {
   boardName: string = '';
+  boardNameExists: boolean = false;
 
   constructor(
+    private boardService: BoardService,
     public dialog: MatDialog,
     public dialogRef: MatDialogRef<EditBoardComponent>
   ) { }
@@ -25,7 +28,18 @@ export class EditBoardComponent {
     this.dialogRef.close();
   }
 
-  submit(form: FormGroup) {
-    this.dialogRef.close(form);
+  submit(formValue: any): void {
+    this.boardService.checkIfBoardNameExists(formValue.boardName).subscribe(
+      (ifUniqueBoardName: boolean) => {
+        if (ifUniqueBoardName) {
+          this.dialogRef.close(formValue);
+        } else {
+          this.boardNameExists = true;
+        }
+      },
+      (error) => {
+        console.error('Error checking board name:', error);
+      }
+    );
   }
 }

@@ -26,11 +26,6 @@ export class ColumnComponent {
   @Output() onEditCard = new EventEmitter<boolean>();
 
   cards: Card[] = [];
-  showCreateForm = false;
-  cardName!: string;
-  description!: string;
-  cardOwner!: string;
-  status?: string;
 
   constructor(public dialog: MatDialog,
     private cardService: CardService) { }
@@ -40,7 +35,6 @@ export class ColumnComponent {
   }
 
   getCards(): void {
-    console.log("column id " + this.column.columnId)
     this.cardService.getCards(this.column.columnId!).subscribe(
       (response: Card[]) => {
         this.cards = response;
@@ -52,14 +46,12 @@ export class ColumnComponent {
   }
 
   addCard() {
-    console.log("addCard");
     const dialogRef = this.dialog.open(CreateCardComponent, {
       data: {
         board: this.board
       }
     });
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result);
       if (result) {
         this.cardService.createCard({
           ...result,
@@ -90,16 +82,22 @@ export class ColumnComponent {
       }
     });
     dialogRef.afterClosed().subscribe((editedCard: Card) => {
-      this.cardService.createCard(editedCard).subscribe(
-        (response: Card) => {
-          console.log('Card created successfully:', response);
-          this.getCards();
-          this.onEditCard.emit(true);
-        },
-        (error) => {
-          console.error('Error creating card:', error);
-        }
-      );
+      if (editedCard) {
+        this.cardService.createCard(editedCard).subscribe(
+          (response: Card) => {
+            if (response) {
+              console.log('Card edited successfully:', response);
+              this.getCards();
+              this.onEditCard.emit(true);
+            } else {
+              this.getCards();
+            }
+          },
+          (error) => {
+            console.error('Error edited card:', error);
+          }
+        );
+      }
     });
   }
 

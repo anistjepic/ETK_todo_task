@@ -64,12 +64,6 @@ export class CreateCardComponent {
   }
 
   cancelForm(): void {
-    this.cardName = '';
-    this.cardDescription = '';
-    this.cardOwner = '';
-    this.cardStatus = '';
-    this.showCreateForm = false;
-
     this.dialogRef.close();
   }
 

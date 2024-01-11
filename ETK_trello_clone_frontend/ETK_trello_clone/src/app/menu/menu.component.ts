@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Column } from '../models/column';
-import { Card } from '../models/card';
 import { FormsModule } from '@angular/forms';
 import { NgIf, NgFor } from '@angular/common';
 import { Board } from '../models/board';
@@ -20,7 +19,6 @@ export class MenuComponent {
   @Output() onCreateColumn = new EventEmitter<Column>();
   @Output() onFilterColumn = new EventEmitter<string>();
 
-  column: Column[] = [];
   showCreateColumnForm: boolean = false;
   showFilterColumnForm: boolean = false;
   columnName!: string;

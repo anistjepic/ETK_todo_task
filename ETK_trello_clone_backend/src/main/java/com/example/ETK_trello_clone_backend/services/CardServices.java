@@ -62,21 +62,6 @@ public class CardServices {
         }
     }
 
-    public Card getCardByCardName(String name) {
-        return cardRepo.findByCardName(name)
-                .orElseThrow(() -> new NotFoundException("Card with name: " + name + " doesn't exist!"));
-    }
-
-    public List<Card> getCardsByOwner(String cardOwner) {
-        return cardRepo.findByCardOwner(cardOwner)
-                .orElseThrow(() -> new NotFoundException("Card with owner: " + cardOwner + " doesn't exist!"));
-    }
-
-    public List<Card> getCardsByStatus(String status) {
-        return cardRepo.findByStatus(status)
-                .orElseThrow(() -> new NotFoundException("Card with state: " + status + " doesn't exist!"));
-    }
-
     public void deleteCard(Long id) {
         cardRepo.deleteById(id);
     }
